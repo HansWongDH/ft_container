@@ -4,19 +4,19 @@
 template<typename Type>
 ft::random_access_iterator<Type>::random_access_iterator(void) : _p (NULL)
 {
-	std::cout << "random_access_iterator constructed" << std::endl;
+	// std::cout << "default random_access_iterator constructed" << std::endl;
 }
 
 template<typename Type>
 ft::random_access_iterator<Type>::~random_access_iterator()
 {
-	std::cout << "random_access_iterator destructed" << std::endl;
+	// std::cout << "random_access_iterator destructed" << std::endl;
 }
 
 template<typename Type>
-ft::random_access_iterator<Type>::random_access_iterator(pointer p)
+ft::random_access_iterator<Type>::random_access_iterator(pointer p) : _p(p)
 {
-	this->_p = p;
+	// std::cout << "random_access_iterator constructed" << std::endl;
 }
 
 template<typename Type>
@@ -24,7 +24,7 @@ ft::random_access_iterator<Type>::random_access_iterator(const ft::random_access
 {
 	if (a._p != NULL)
 		this->_p = a._p;
-	std::cout << "random_access_iterator copy constructor called" << std::endl;
+	// std::cout << "random_access_iterator copy constructor called" << std::endl;
 }
 
 template<typename Type>
@@ -85,18 +85,18 @@ ft::random_access_iterator<Type>&	ft::random_access_iterator<Type>::operator--(i
 }
 
 template<typename Type>
-ft::random_access_iterator<Type>	ft::random_access_iterator<Type>::operator+(int n)
+ft::random_access_iterator<Type>	ft::random_access_iterator<Type>::operator+(difference_type n)
 {
-	return random_access_iterator(this->_p + n);
+	return this->_p + n;
 }
 
 template<typename Type>
-ft::random_access_iterator<Type>	operator+(int n, ft::random_access_iterator<Type> &a)
+ft::random_access_iterator<Type>	operator+(typename ft::random_access_iterator<Type>::difference_type n, ft::random_access_iterator<Type> &a)
 {
 	return (a + n);
 }
 template<typename Type>
-ft::random_access_iterator<Type>	ft::random_access_iterator<Type>::operator-(int n)
+ft::random_access_iterator<Type>	ft::random_access_iterator<Type>::operator-(difference_type n)
 {
 	return random_access_iterator(this->_p - n);
 }

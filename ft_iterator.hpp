@@ -24,8 +24,8 @@ namespace	ft
 		random_access_iterator&	operator++(int);
 		random_access_iterator&	operator--(void);
 		random_access_iterator&	operator--(int);
-		random_access_iterator	operator+(int);
-		random_access_iterator	operator-(int);
+		random_access_iterator	operator+(difference_type);
+		random_access_iterator	operator-(difference_type);
 		random_access_iterator::difference_type	operator-(random_access_iterator &a);
 		bool	operator!=(const random_access_iterator &a);
 		bool	operator==(const random_access_iterator &a);

@@ -1,10 +1,10 @@
-NAME		= test
+NAME		= vector
 
 SRC_DIR		= ./
 OBJ_DIR		= obj
 INC_DIR		= inc
 
-SRC_FILES	= test.cpp
+SRC_FILES	= vectortest.cpp ft_iterator.tpp
 
 GCC 		= c++
 CFLAGS		= -Wall -Wextra -Werror
@@ -30,6 +30,7 @@ ${NAME}:	${LIBFT} $(MLX) ${OBJ_FILES} ${OBJ_BANNER}
 	${GCC} -o ${NAME} ${OBJ_FILES} $(SANITIZE)
 
 test: $(NAME)
+	./$(NAME)
 
 clean:
 	$(RM) $(OBJ_DIR)/*
