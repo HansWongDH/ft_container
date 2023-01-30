@@ -40,6 +40,34 @@ namespace	ft
 		private:
 			pointer	_p;
 	};
+
+	template<bool, class T>    //i give it two parameters, up to you to give more or less
+	struct enable_if
+	{};
+
+	template <class T>
+	struct enable_if<true, T>
+	{
+    	typedef T type;     //if true define the T type value
+	};
+
+	template <class T, T v>
+	struct integral_constant   //integral C++ struct in C++98 manner
+	{
+		typedef T value_type;
+		typedef integral_constant<T,v> type;
+		static const T value = v;
+		operator T() { return value; }
+	};
+
+	typedef integral_constant<bool,true> true_type;
+	typedef integral_constant<bool,false> false_type;
+
+	template<typename T>
+	struct is_integral : public false_type{};
+	
+	template<>
+	struct is_integral<char> : public true_type{};
 };
 
 #endif
