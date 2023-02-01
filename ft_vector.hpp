@@ -2,6 +2,7 @@
 #define FT_VECTOR_HPP
 
 #include <iostream>
+#include <stdexcept>
 #include "ft_iterator.tpp"
 
 namespace	ft
@@ -91,16 +92,15 @@ namespace	ft
 				if (count > capacity())
 				{
 					size_type new_cap = capacity() * 2;
+					std::cout << new_cap << std::endl;
 					if (count > new_cap)
 						reserve(new_cap + (count - new_cap));
 					else
 						reserve(new_cap);
 				}
-				for (;first != last; first++)
-				{
-					*(this->_data) = *first;
-					this->_data++;
-				}
+				for (size_type i = 0; i < count; i++)
+					*(this->_data + i) = *(first + i);
+				this->_size = count;
 			}
 
 			iterator	ft_iterator(void){
@@ -127,6 +127,10 @@ namespace	ft
 				return (this->_capacity);
 			}
 
+			size_type size(void) const {
+				return (this->_size);
+			}
+
 			void	reserve	(size_type new_cap)	{
 	
 				if (new_cap < this->_capacity)
@@ -139,9 +143,54 @@ namespace	ft
 				this->_capacity = new_cap;
 			}
 
+			reference	at(size_type pos)
+			{
+				if (pos >= size())
+					throw std::out_of_range("pos is out of range");
+				return *(this->_data + pos);
+			}
+			const_reference	at(size_type pos) const
+			{
+				if (pos >= size())
+					throw std::out_of_range("pos is out of range");
+				return *(this->_data + pos);
+			}
+
+			reference	front(void)
+			{
+				return *(this->_data);
+			}
+
+			const_reference	front(void) const
+			{
+				return *(this->_data);
+			}
+
+			reference	back(void)
+			{
+				return *(this->_data + size() - 1);
+			}
+
+			const_reference back(void) const
+			{
+				return *(this->_data + size() - 1);
+			}
+
+			value_type	*data(void)
+			{
+				return (this->_data);
+			}
+
+			const value_type* data(void) const 
+			{
+				std::cout << "const called" << std::endl;
+				return (this->_data);
+			}
+
 			// Vector(const Vector &a);
 			// Vector&	operator=(const Vector&a);
 	};
 };
+
 
 #endif
