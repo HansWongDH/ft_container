@@ -68,12 +68,12 @@ namespace ft
 			pointer _p;
 	};
 
-	template<typename T, typename Node, class Compare, bool Cst = false>
+	template<typename T, typename Node, class Compare>
 	class tree_iterator : public ft::bidirectional_iterator<T> {
 			
 		public:
-			typedef typename Iterator<std::bidirectional_iterator_tag, typename ft::enable_if_const<Cst, T>::type >::value_type	    	value_type;
-			typedef typename ft::enable_if_const<Cst, Node>::type	node_type;
+			typedef typename Iterator<std::bidirectional_iterator_tag, typename ft::remove_const<T>::type>::value_type	    	value_type;
+			typedef Node	node_type;
 			typedef typename Iterator<std::bidirectional_iterator_tag, value_type>::pointer 			pointer;
 			typedef typename Iterator<std::bidirectional_iterator_tag, value_type>::reference			reference;
 			typedef typename Iterator<std::bidirectional_iterator_tag, node_type>::pointer 			node_pointer;
@@ -87,10 +87,11 @@ namespace ft
 			tree_iterator(node_pointer node, node_pointer TNULL, const Compare& cmp = Compare() ) : _p(node), _TNULL(TNULL), _cmp(cmp){
 
 			}
-			tree_iterator(const tree_iterator& a) : _p(a._p), _TNULL(a._TNULL), _cmp(a._cmp) {
+		
+			tree_iterator(const tree_iterator<typename ft::remove_const<T>::type, Node, Compare> & a) : _p(a.getP()), _TNULL(a.getNULL()), _cmp(a.getComp()) {
 
 			}
-			tree_iterator &operator=(const tree_iterator &a)
+			tree_iterator &operator=(const tree_iterator<typename ft::remove_const<T>::type, Node, Compare> &a)
 			{
 				if (*this == a)
 					return *this;
@@ -276,6 +277,19 @@ namespace ft
 				return succ;
 			}
 
+			node_pointer getP() const
+			{
+				return this->_p;
+			}
+
+			node_pointer getNULL() const
+			{
+				return this->_TNULL;
+			}
+			Compare	getComp() const
+			{
+				return this->_cmp;
+			}
 		private:
 			node_pointer	_p;
 			node_pointer	_TNULL;

@@ -31,7 +31,7 @@ namespace	ft
             typedef typename allocator_type::const_pointer      					const_pointer;
             typedef typename allocator_type::size_type          					size_type;
             typedef typename ft::RedBlackTree<key_type, value_type, pair_compare>::iterator	iterator;
-			typedef typename ft::RedBlackTree<key_type, value_type, pair_compare, ft::is_const<value_type>::value >::iterator	const_iterator;
+			typedef typename ft::RedBlackTree<key_type, value_type, pair_compare>::const_iterator	const_iterator;
 			typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
 			typedef typename ft::reverse_iterator<const_iterator>					const_reverse_iterator;
 			typedef typename iterator::difference_type								difference_type;
@@ -215,23 +215,23 @@ namespace	ft
 
 		reverse_iterator	rbegin(void)
 		{
-			return reverse_iterator(begin());
+			return reverse_iterator(this->end());
 		}
 		
 		reverse_iterator	rend(void)
 		{
-			return reverse_iterator(end());
+			return reverse_iterator(this->begin());
 		}
 
 		const_reverse_iterator	rbegin(void) const
 		{
-			return reverse_iterator(begin());
+			return reverse_iterator(this->end());
 		}
 
 	
 		const_reverse_iterator	rend(void) const
 		{
-			return reverse_iterator(end());
+			return reverse_iterator(this->begin());
 		}
 
 		iterator	upper_bound(const key_type& key)
@@ -272,8 +272,7 @@ namespace	ft
 
 		size_type count(key_type key) const
 		{
-			iterator it = find(key);
-			if (it != end())
+			if (find(key) != end())
 				return 1;
 			return 0;
 		}
@@ -321,7 +320,7 @@ namespace	ft
     
         allocator_type alloc;
 		key_compare comp;
-		RedBlackTree<key_type, value_type, pair_compare > _data;
+		RedBlackTree<key_type, value_type, pair_compare> _data;
 		
 };
 	template< typename Key, typename T, typename Alloc >

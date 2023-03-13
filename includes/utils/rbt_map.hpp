@@ -18,12 +18,13 @@ namespace ft
     <typename value, typename Key, class Compare = ft::my_less<Key>, bool Cst = false,  typename Allocator = std::allocator<ft::Node<Key> > >
     class RedBlackTree {
         public:
+			typedef typename ft::remove_const<Key>::type		key_type;
 			typedef Allocator allocator_type;
-			typedef ft::Node<Key>	node;
-            typedef ft::Node<Key>*	nodeptr;
+			typedef ft::Node<key_type>	node;
+            typedef ft::Node<key_type>*	nodeptr;
 			typedef Compare	key_compare;
-			typedef value	key_type;
-			typedef ft::tree_iterator<Key, node, key_compare, Cst>	iterator;
+			typedef ft::tree_iterator<Key, node, key_compare>	iterator;
+			typedef ft::tree_iterator<const Key, node, key_compare>	const_iterator;
 			typedef size_t	size_type;
 
 		
@@ -38,7 +39,7 @@ namespace ft
 
 			 RedBlackTree(Key key, const allocator_type& alloc = allocator_type()): _alloc(alloc)
             {
-				TNULL = _alloc.allocate(1);\
+				TNULL = _alloc.allocate(1);
 				_alloc.construct(TNULL, node(key));
 			   root = TNULL;
             }

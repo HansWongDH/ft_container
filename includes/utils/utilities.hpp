@@ -130,23 +130,30 @@ typename std::iterator_traits<inputIt>::difference_type distance(inputIt first, 
     return result;
 }
 
-	template<bool, class T>    
-	struct enable_if_const
-	{};
+	template< class T>    
+	struct remove_const
+	{
+		typedef T type;
+	};
 	
 
-	template <class T>
-	struct enable_if_const<true, T>
-	{
-		typedef const T type;    
-	};
+	// template <class T>
+	// struct remove_const<true, T>
+	// {
+	// 	typedef const T type;    
+	// };
 
 	template <class T>
-	struct enable_if_const<false, T>
+	struct remove_const<const T>
 	{
 		typedef T type;    
 	};
 
+	// template <class T>
+	// struct remove_const<T>
+	// {
+	// 	typedef T type;    
+	// };
 	template<typename T>
 	struct is_const {
    		static const bool value = false;
@@ -178,6 +185,7 @@ typename std::iterator_traits<inputIt>::difference_type distance(inputIt first, 
 		// 	this->second = a.second;
 		// 	return *this;
 		// }
+		
         ~pair() {};
     
 	
@@ -194,6 +202,42 @@ typename std::iterator_traits<inputIt>::difference_type distance(inputIt first, 
 		return ft::pair<T1, T2>(first, second);
 	};
 
+		template<typename T1, typename T2>
+	bool operator==( const ft::pair<T1, T2>& lhs,
+					const ft::pair<T1, T2>& rhs ) {
+			return (lhs.first == rhs.first && lhs.second == rhs.second );
+		};
+
+	template< typename T1, typename T2 >
+	bool operator!=( const ft::pair<T1, T2>& lhs,
+					const ft::pair<T1, T2>& rhs ) {
+			return !(lhs == rhs);		
+		};
+
+
+	template<typename T1, typename T2>
+	bool operator<( const ft::pair<T1, T2>& lhs,
+					const ft::pair<T1, T2>& rhs ) {
+			 return (lhs.first < rhs.first || (!(rhs.first < lhs.first) && lhs.second < rhs.second));
+		};
+
+	template<typename T1, typename T2>
+	bool operator<=( const ft::pair<T1, T2>& lhs,
+					const ft::pair<T1, T2>& rhs ) {
+			return !(rhs < lhs);
+		};
+
+	template<typename T1, typename T2>
+	bool operator>( const ft::pair<T1, T2>& lhs,
+					const ft::pair<T1, T2>& rhs ) {
+			return rhs < lhs;
+		};
+
+	template<typename T1, typename T2>
+	bool operator>=( const ft::pair<T1, T2>& lhs,
+					const ft::pair<T1, T2>& rhs ) {
+			return !(lhs < rhs);
+		};
 
 	template
     <typename T>
