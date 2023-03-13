@@ -1,10 +1,10 @@
-NAME		= vector
+NAME		= container
 
 SRC_DIR		= ./
 OBJ_DIR		= obj
 INC_DIR		= inc
 
-SRC_FILES	= vectortest.cpp ft_iterator.tpp
+SRC_FILES	= main.cpp
 
 GCC 		= c++
 CFLAGS		= -Wall -Wextra -Werror
@@ -27,7 +27,7 @@ $(MLX):
 	make -C $(MLX_DIR)
 
 ${NAME}:	${LIBFT} $(MLX) ${OBJ_FILES} ${OBJ_BANNER}
-	${GCC} -o ${NAME} ${OBJ_FILES} $(SANITIZE)
+	${GCC}  $(C++FLAGS) -o ${NAME} ${OBJ_FILES} $(SANITIZE)
 
 test: $(NAME)
 	./$(NAME)

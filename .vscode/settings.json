@@ -64,6 +64,19 @@
 		"typeinfo": "cpp",
 		"unordered_map": "cpp",
 		"utility": "cpp",
-		"*.tpp": "cpp"
+		"*.tpp": "cpp",
+		"*.tcc": "cpp",
+		"clocale": "cpp",
+		"memory_resource": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"fstream": "cpp",
+		"list": "cpp",
+		"set": "cpp",
+		"condition_variable": "cpp",
+		"csignal": "cpp",
+		"unordered_set": "cpp",
+		"iomanip": "cpp",
+		"thread": "cpp"
 	}
 }
