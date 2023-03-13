@@ -43,9 +43,27 @@ namespace ft
 				_alloc.construct(TNULL, node(key));
 			   root = TNULL;
             }
+
+			RedBlackTree(const RedBlackTree& other) : _alloc(other._alloc), _com(other._com), TNULL(other.TNULL), root(other.root)
+			{
+				// this->TNULL = other.TNULL;
+				// this->root = other.root;
+				// this->_alloc = other._alloc;
+				// this->_com = other._com;
+			}
+
+			RedBlackTree& operator=(const RedBlackTree& other)
+			{
+				this->TNULL = other.TNULL;
+				this->root = other.root;
+				this->_alloc = other._alloc;
+				this->_com = other._com;
+				return *this;
+			}
             ~RedBlackTree()
             {
-				// this->deleteSentinel();
+				fullDelete();
+				deleteSentinel();
             }
 
 			void printHelper(nodeptr root, std::string indent, bool last) 
@@ -640,13 +658,21 @@ namespace ft
 				return TNULL;
 			}
 
+		
+		// friend bool operator==(const ft::RedBlackTree<Key, T, Alloc>& lhs,
+		// 			const ft::RedBlackTree<Key, T, Alloc>& rhs ) 
+		// 			{
+		// 	return ft::equal(ft:lhs, lhs.end(), rhs.begin());
+		// };
 
         private:
-            nodeptr root;
-            nodeptr TNULL;
 			Allocator _alloc;
 			Compare _com;
+            nodeptr TNULL;
+			nodeptr root;
+		
     };
+
 }
 
 #endif

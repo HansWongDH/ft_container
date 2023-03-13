@@ -19,30 +19,20 @@ namespace	ft
     class Allocator = std::allocator<ft::pair<const Key, T> >
 > class map{
     public:
+
+		
             typedef Key                                         							key_type;
             typedef T                                           							mapped_type;
             typedef ft::pair<const key_type, mapped_type>             					value_type;
             typedef Compare                                     					key_compare;
-			typedef	ft::my_less<value_type>											pair_compare;
             typedef Allocator                                 						allocator_type;
             typedef typename allocator_type::reference          					reference;
             typedef typename allocator_type::const_reference   						const_reference;
             typedef typename allocator_type::pointer            					pointer;
             typedef typename allocator_type::const_pointer      					const_pointer;
             typedef typename allocator_type::size_type          					size_type;
-            typedef typename ft::RedBlackTree<key_type, value_type, pair_compare>::iterator	iterator;
-			typedef typename ft::RedBlackTree<key_type, value_type, pair_compare>::const_iterator	const_iterator;
-			typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
-			typedef typename ft::reverse_iterator<const_iterator>					const_reverse_iterator;
-			typedef typename iterator::difference_type								difference_type;
-			typedef typename iterator::iterator_category							iterator_category;
-      
 
-		/**
-		 * @brief refer std::less class structure
-		 * 
-		 */
-		class value_compare
+			class value_compare
 		{
 			private:
 				key_compare c;
@@ -60,26 +50,40 @@ namespace	ft
 					return (c(lhs.first, rhs.first));
 				}
 		};
+            typedef typename ft::RedBlackTree<key_type, value_type, value_compare>::iterator	iterator;
+			typedef typename ft::RedBlackTree<key_type, value_type, value_compare>::const_iterator	const_iterator;
+			typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
+			typedef typename ft::reverse_iterator<const_iterator>					const_reverse_iterator;
+			typedef typename iterator::difference_type								difference_type;
+			typedef typename iterator::iterator_category							iterator_category;
+      
+
+		/**
+		 * @brief refer std::less class structure
+		 * 
+		 */
+		
 		explicit map(const Compare& comp = Compare(), const Allocator& alloc = Allocator()) : alloc(alloc), comp(comp), _data()
 		{
 		}
 		
 		map( const map& other ) : alloc(other.alloc), comp(other.comp) {
-
-			this->insert(other.begin(), other.end());
+			this->clear();
+			this->_data = other._data;
 		}
 
 		template<class InputIt>
 		map(InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator(), 
 		typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = nullptr_t) : alloc(alloc), comp(comp)
 		{
+			this->clear();
 			this->insert(first, last);
 		}
 
 
         ~map() {
-			this->clear();
-			this->_data.deleteSentinel();
+			// this->clear();
+			// this->_data.deleteSentinel();
 		}
 
     	pair<iterator, bool>	insert(const value_type& k)
@@ -105,11 +109,13 @@ namespace	ft
 
 		map& operator=(const map& other)
 		{
+
 			if (this == &other)
 				return *this;
+			this->clear();
 			this->alloc = other.alloc;
 			this->comp = other.comp;
-			this->insert(other.begin(), other.end());
+			this->_data = other._data;
 			return *this;
 		}
 		
@@ -305,7 +311,7 @@ namespace	ft
 					return;
 				key_compare		tmp_comp = x.comp;
 				allocator_type	tmp_alloc = x.alloc;
-				ft::RedBlackTree<key_type, value_type, pair_compare> tmp_data = x._data;
+				ft::RedBlackTree<key_type, value_type, value_compare> tmp_data = x._data;
 				
 				x._data = this->_data;
 				x.comp = this->comp;
@@ -320,7 +326,7 @@ namespace	ft
     
         allocator_type alloc;
 		key_compare comp;
-		RedBlackTree<key_type, value_type, pair_compare> _data;
+		RedBlackTree<key_type, value_type, value_compare> _data;
 		
 };
 	template< typename Key, typename T, typename Alloc >
