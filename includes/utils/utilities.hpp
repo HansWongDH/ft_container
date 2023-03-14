@@ -270,23 +270,23 @@ typename std::iterator_traits<inputIt>::difference_type distance(inputIt first, 
 			return this->data;
 		}
 
-		Node* rightNav(Node* node, Node* sentinel)
-		{
-			if (!node)
-				return nullptr_t;
-			while (node->right != sentinel)
-				node = node->right;
-			return node;
-		}
+		// Node* rightNav(Node* node, Node* sentinel)
+		// {
+		// 	if (!node)
+		// 		return sentinel;
+		// 	while (node->right != sentinel)
+		// 		node = node->right;
+		// 	return node;
+		// }
 
-		Node* leftNav(Node* node, Node* sentinel)
-		{
-			if (!node)
-				return nullptr_t;
-			while (node->left != sentinel)
-				node = node->left;
-			return node;
-		}
+		// Node* leftNav(Node* node, Node* sentinel)
+		// {
+		// 	if (!node)
+		// 		return sentinel;
+		// 	while (node->left != sentinel)
+		// 		node = node->left;
+		// 	return node;
+		// }
 
 		Node	&operator*()
 		{

@@ -20,8 +20,8 @@ namespace ft{
 		typedef typename allocator_type::pointer				pointer;
 		typedef typename allocator_type::const_pointer		const_pointer;
 		typedef typename allocator_type::size_type          					size_type;
-		typedef typename ft::RedBlackTree<key_type, value_type, key_compare>::iterator	iterator;
-		typedef typename ft::RedBlackTree<key_type, value_type, key_compare, ft::is_const<value_type>::value >::iterator	const_iterator;
+		typedef typename ft::RedBlackTree<key_type, value_type, key_compare>::const_iterator	iterator;
+		typedef typename ft::RedBlackTree<key_type, value_type, key_compare>::const_iterator	const_iterator;
 		typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator>					const_reverse_iterator;
 		typedef typename iterator::difference_type								difference_type;
@@ -41,7 +41,7 @@ namespace ft{
 		}
 		~set() {
 			this->clear();
-			this->_data.deleteSentinel();
+			// this->_data.deleteSentinel();
 		}
 
 		size_type erase(const key_type& k)
@@ -185,8 +185,7 @@ namespace ft{
 		
 		size_type count(key_type key) const
 		{
-			iterator it = find(key);
-			if (it != end())
+			if (find(key) != end())
 				return 1;
 			return 0;
 		}
@@ -223,21 +222,14 @@ namespace ft{
 			return key_compare();
 		}
 
-		void swap (set& x)
+		void swap (set& other)
 			{
-				if (x == *this)
+				if (other == *this)
 					return;
-				key_compare		tmp_comp = x.comp;
-				allocator_type	tmp_alloc = x.alloc;
-				ft::RedBlackTree<key_type, value_type, key_compare> tmp_data = x._data;
 
-				x._data = this->_data;
-				x.comp = this->comp;
- 				x.alloc = this->alloc;
-
-				this->_data = tmp_data;
-				this->alloc = tmp_alloc;
-				this->comp = tmp_comp;
+				_data.swap(other._data);
+				this->alloc = other.alloc;
+				this->comp = other.comp;
 			}
 		
 		private:

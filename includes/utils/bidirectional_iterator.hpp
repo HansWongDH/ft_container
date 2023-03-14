@@ -72,11 +72,11 @@ namespace ft
 	class tree_iterator : public ft::bidirectional_iterator<T> {
 			
 		public:
-			typedef typename Iterator<std::bidirectional_iterator_tag, typename ft::remove_const<T>::type>::value_type	    	value_type;
+			typedef typename Iterator<std::bidirectional_iterator_tag, T>::value_type	    	value_type;
 			typedef Node	node_type;
 			typedef typename Iterator<std::bidirectional_iterator_tag, value_type>::pointer 			pointer;
 			typedef typename Iterator<std::bidirectional_iterator_tag, value_type>::reference			reference;
-			typedef typename Iterator<std::bidirectional_iterator_tag, node_type>::pointer 			node_pointer;
+			typedef typename Iterator<std::bidirectional_iterator_tag, node_type>::pointer 				node_pointer;
 			typedef typename Iterator<std::bidirectional_iterator_tag, node_type>::reference			node_reference;
 			typedef typename Iterator<std::bidirectional_iterator_tag, value_type>::difference_type		difference_type;
 			typedef typename Iterator<std::bidirectional_iterator_tag, value_type>::iterator_category	iterator_category;
@@ -295,6 +295,7 @@ namespace ft
 			node_pointer	_TNULL;
 			Compare _cmp;
 	};
+
 } // namespace ft
 
 

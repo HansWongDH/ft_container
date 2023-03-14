@@ -9,6 +9,9 @@
 #include "./utils/bidirectional_iterator.hpp"
 // #include <memory>
 
+using std::cout;
+using std::endl;
+
 namespace	ft
 {
 
@@ -67,9 +70,8 @@ namespace	ft
 		{
 		}
 		
-		map( const map& other ) : alloc(other.alloc), comp(other.comp) {
-			this->clear();
-			this->_data = other._data;
+		map( const map& other ) : alloc(other.alloc), comp(other.comp), _data(other._data)
+		{
 		}
 
 		template<class InputIt>
@@ -82,7 +84,7 @@ namespace	ft
 
 
         ~map() {
-			// this->clear();
+			this->clear();
 			// this->_data.deleteSentinel();
 		}
 
@@ -146,6 +148,8 @@ namespace	ft
 
 		size_type size(void) const
 		{
+			// cout << "begin :" <<  begin()->first << endl;
+			// cout << "end  :" <<  end()->first << endl;
 			return ft::distance(begin(), end());
 		}
 
@@ -163,6 +167,7 @@ namespace	ft
 		void clear(void)
 		{
 			this->_data.fullDelete();
+			// cout << "clear size : " << size() << endl;
 		}
 		// void	test(const key_type k)
 		// {
@@ -309,17 +314,20 @@ namespace	ft
 			{
 				if (&x == this)
 					return;
-				key_compare		tmp_comp = x.comp;
-				allocator_type	tmp_alloc = x.alloc;
-				ft::RedBlackTree<key_type, value_type, value_compare> tmp_data = x._data;
+				// key_compare		tmp_comp = x.comp;
+				// allocator_type	tmp_alloc = x.alloc;
+				// ft::RedBlackTree<key_type, value_type, value_compare> tmp_data = x._data;
 				
-				x._data = this->_data;
-				x.comp = this->comp;
- 				x.alloc = this->alloc;
+				// x._data = this->_data;
+				// x.comp = this->comp;
+ 				// x.alloc = this->alloc;
 
-				this->_data = tmp_data;
-				this->alloc = tmp_alloc;
-				this->comp = tmp_comp;
+				// this->_data = tmp_data;
+				// this->alloc = tmp_alloc;
+				// this->comp = tmp_comp;
+				std::swap(this->alloc, x.alloc);
+				std::swap(this->comp, x.comp);
+				this->_data.swap(x._data);
 			}
 		
     private:
@@ -368,7 +376,11 @@ bool operator>=( const ft::map<Key, T, Alloc>& lhs,
                  const ft::map<Key, T, Alloc>& rhs ) {
 		return !(lhs < rhs);
 	};
-
+	template< class Key, class T, class Compare, class Alloc >
+	void swap( ft::map<Key, T, Compare, Alloc>& lhs,ft::map<Key, T, Compare, Alloc>& rhs )
+	{
+		return lhs.swap(rhs);
+	};
 }
 
 #endif
