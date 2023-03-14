@@ -711,14 +711,7 @@ namespace ft
 				printHelper(this->root, "", BLACK);
 			}
 
-			nodeptr	getRoot(void)
-			{
-				if (root)
-					return (root);
-				// return (nullptr_t);
-			}
-
-			nodeptr getValue(void) const
+			nodeptr getSentinel(void) const
 			{
 				return TNULL;
 			}
@@ -742,14 +735,12 @@ namespace ft
 			{
 				return const_iterator(TNULL, TNULL);
 			}
-		// friend bool operator==(const ft::RedBlackTree<Key, T, Alloc>& lhs,
-		// 			const ft::RedBlackTree<Key, T, Alloc>& rhs ) 
-		// 			{
-		// 	return ft::equal(ft:lhs, lhs.end(), rhs.begin());
-		// };
+
 
 		void swap (RedBlackTree& x)
 		{
+			if (*this == x)
+				return;
 			std::swap(this->_alloc, x._alloc);
 			std::swap(this->_com, x._com);
 			std::swap(this->TNULL, x.TNULL);
@@ -763,6 +754,45 @@ namespace ft
 			nodeptr root;
 		
     };
+	template<typename T, typename Alloc >
+	bool operator==(const ft::RedBlackTree<T, Alloc>& lhs, const ft::RedBlackTree<T, Alloc>& rhs) 
+	{
+		if (lhs.size() != rhs.size())
+			return false;
+		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+	};
+
+	template<typename T, typename Alloc >
+	bool operator!=(const ft::RedBlackTree<T, Alloc>& lhs, const ft::RedBlackTree<T, Alloc>& rhs) 
+	{
+		return !(lhs == rhs);		
+	};
+
+
+	template<typename T, typename Alloc >
+	bool operator<(const ft::RedBlackTree<T, Alloc>& lhs, const ft::RedBlackTree<T, Alloc>& rhs)
+	{
+		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+	};
+
+
+	template<typename T, typename Alloc >
+	bool operator<=(const ft::RedBlackTree<T, Alloc>& lhs, const ft::RedBlackTree<T, Alloc>& rhs) 
+	{
+		return !(rhs < lhs);
+	};
+
+	template<typename T, typename Alloc >
+	bool operator>(const ft::RedBlackTree<T, Alloc>& lhs, const ft::RedBlackTree<T, Alloc>& rhs) 
+	{
+		return rhs < lhs;
+	};
+
+	template<typename T, typename Alloc >
+	bool operator>=(const ft::RedBlackTree<T, Alloc>& lhs, const ft::RedBlackTree<T, Alloc>& rhs) 
+	{
+		return !(lhs < rhs);
+	};
 
 }
 

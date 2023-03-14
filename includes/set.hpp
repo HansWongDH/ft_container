@@ -33,15 +33,16 @@ namespace ft{
 
 		}
 
-		template< class InputIt > set( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator()) : alloc(alloc), comp(comp) {
+		template< class InputIt > set( InputIt first, InputIt last, const Compare& comp = Compare(), const Allocator& alloc = Allocator()) : alloc(alloc), comp(comp) 
+		{
 				this->insert(first, last);
 		}
-		set( const set& other ) : alloc(other.alloc), comp(other.comp) {
+		set(const set& other) : alloc(other.alloc), comp(other.comp) 
+		{
 			this->insert(other.begin(), other.end());
 		}
-		~set() {
-			this->clear();
-			// this->_data.deleteSentinel();
+		~set() 
+		{
 		}
 
 		size_type erase(const key_type& k)
@@ -55,7 +56,7 @@ namespace ft{
 			return 0;
 		}
 
-				size_type size(void) const
+		size_type size(void) const
 		{
 			return ft::distance(begin(), end());
 		}
@@ -105,24 +106,25 @@ namespace ft{
 			for (; n > 0; n--, first++)
 				this->insert(*first);
 		}
-		iterator    begin(void)
+
+        iterator    begin(void)
         {
-            return iterator(this->_data.getValue()->left, this->_data.getValue());
+            return this->_data.begin();
         }
 
         iterator    end(void)
         {
-            return iterator(this->_data.getValue(), this->_data.getValue());
+            return this->_data.end();
         }
 
 		const_iterator    begin(void) const
         {
-            return const_iterator(this->_data.getValue()->left, this->_data.getValue());
+            return this->_data.begin();
         }
 
         const_iterator    end(void) const
         {
-            return const_iterator(this->_data.getValue(), this->_data.getValue());
+            return this->_data.end();
         }
 
 		reverse_iterator	rbegin(void)
@@ -239,43 +241,43 @@ namespace ft{
 
 	};
 
-	template< typename T, typename Alloc >
-bool operator==( const ft::set<T, Alloc>& lhs,
-                 const ft::set<T, Alloc>& rhs ) {
+	template<typename T, typename Alloc >
+	bool operator==(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs) 
+	{
 		if (lhs.size() != rhs.size())
 			return false;
 		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
 	};
 
-template< typename T, typename Alloc >
-bool operator!=( const ft::set<T, Alloc>& lhs,
-                 const ft::set<T, Alloc>& rhs ) {
+	template<typename T, typename Alloc >
+	bool operator!=(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs) 
+	{
 		return !(lhs == rhs);		
 	};
 
 
-template< typename T, typename Alloc >
-bool operator<( const ft::set<T, Alloc>& lhs,
-                const ft::set<T, Alloc>& rhs ) {
+	template<typename T, typename Alloc >
+	bool operator<(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs)
+	{
 		return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
 	};
 
 
-template< typename T, typename Alloc >
-bool operator<=( const ft::set<T, Alloc>& lhs,
-                 const ft::set<T, Alloc>& rhs ) {
+	template<typename T, typename Alloc >
+	bool operator<=(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs) 
+	{
 		return !(rhs < lhs);
 	};
 
-template< typename T, typename Alloc >
-bool operator>( const ft::set<T, Alloc>& lhs,
-                const ft::set<T, Alloc>& rhs ) {
+	template<typename T, typename Alloc >
+	bool operator>(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs) 
+	{
 		return rhs < lhs;
 	};
 
-template< typename T, typename Alloc >
-bool operator>=( const ft::set<T, Alloc>& lhs,
-                 const ft::set<T, Alloc>& rhs ) {
+	template<typename T, typename Alloc >
+	bool operator>=(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs) 
+	{
 		return !(lhs < rhs);
 	};
 
