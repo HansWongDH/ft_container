@@ -11,9 +11,7 @@ using std::endl;
 
 namespace ft
 {
-	
-	
-	
+
 	/*when initialize a tree, its left and right is equal = nullptr_t, but to further differentiate its property, a node TNULL is created
 	 tho emulate NULL for tree*/
     template
@@ -32,10 +30,8 @@ namespace ft
 		
             RedBlackTree(const allocator_type& alloc = allocator_type()): _alloc(alloc)
             {
-				
 				TNULL = _alloc.allocate(1);
 				_alloc.construct(TNULL, node(Key(), nullptr_t, TNULL, TNULL));
-			
 			   root = TNULL;
             }
 
@@ -48,45 +44,21 @@ namespace ft
 
 			RedBlackTree(const RedBlackTree& other) : _alloc(other._alloc), _com(other._com)
 			{
-				// this->~RedBlackTree();
-				// fullDelete();
-				// deleteSentinel();
-
 				TNULL = _alloc.allocate(1);
 				_alloc.construct(TNULL, node(Key(), nullptr_t, TNULL, TNULL));
 				root = TNULL;
-
-				// cout << size() << endl;
-
-				// cout <<  "HERER" << endl;
-
 				for (const_iterator it = other.begin(); it != other.end(); it++)
-				{
-					// std::cout << "copy construct : " << it->first << std::endl;
 					this->insert(*it);
-				}
-
-				// this->_alloc = other._alloc;
-				// this->_com = other._com;
 			}
 
 			RedBlackTree& operator=(const RedBlackTree& other)
 			{
 				fullDelete();
-				deleteSentinel();
-				nodeptr TNULL = _alloc.allocate(1);
-				_alloc.construct(TNULL, node(Key(), nullptr_t, TNULL, TNULL));
 				root = TNULL;
-				// this->root = root;
-				// this->TNULL = TNULL;
 				_alloc = other._alloc;
 				_com = other._com;
 				for (const_iterator it = other.begin(); it != other.end(); it++)
-				{
-					// std::cout << "copy assignment : " << it->first << std::endl;
 					this->insert(*it);
-				}
-			
 				return *this;
 			}
 
@@ -95,16 +67,6 @@ namespace ft
 				fullDelete();
 				deleteSentinel();
             }
-
-			void	copyTree(nodeptr node)
-			{
-				if (node != TNULL)
-				{
-					copyTree(node->left);
-					copyTree(node->right);
-					insert(node->data);
-				}
-			}
 
 			void printHelper(nodeptr root, std::string indent, bool last) 
 			{
@@ -598,8 +560,6 @@ namespace ft
 
 			void	fullDelete(void)
 			{
-				// if (root != TNULL)
-				// printTree();
 				deleteRecursion(root);
 				root = TNULL;
 			}
@@ -611,35 +571,12 @@ namespace ft
 
 			void deleteRecursion(nodeptr node)
 			{
-				// // if (node->left != TNULL)
-				// // {
-				// 	deleteRecursion(node->left);
-				// 	// return ;
-				// }
-				// // if (node->right != TNULL)
-				// // {
-				// 	deleteRecursion(node->right);
-				// 	// return;
-				// // }
-				// wif
-				// initDelete(node);
-
 				if (node != TNULL)
 				{
-					// cout << "null left  :" << TNULL->left->data.first << endl;
-					// cout << "null right  :" << TNULL->right->data.first << endl;
-					// cout << "deleting : " << node->data.first << endl; 
-					// cout << "left : " << node->left->data.first << endl; 
-					// cout << "right : " << node->right->data.first << endl; 
-					// printTree();
 		
 					deleteRecursion(node->left);
 					deleteRecursion(node->right);
-					// cout << "deleting fr: " << node->data.first << endl; 
 					initDelete(node);
-					// cout << root->data.first << endl;
-					// cout << (leftNav(root) == TNULL) << endl;
-					// cout << (rightNav(root) == TNULL) << endl;
 				}
 				TNULL->left = TNULL;
 				TNULL->right = TNULL;
@@ -736,16 +673,13 @@ namespace ft
 				return const_iterator(TNULL, TNULL);
 			}
 
-
-		void swap (RedBlackTree& x)
-		{
-			if (*this == x)
-				return;
-			std::swap(this->_alloc, x._alloc);
-			std::swap(this->_com, x._com);
-			std::swap(this->TNULL, x.TNULL);
-			std::swap(this->root, x.root);
-		}
+			void swap(RedBlackTree& x)
+			{
+				std::swap(this->_alloc, x._alloc);
+				std::swap(this->_com, x._com);
+				std::swap(this->TNULL, x.TNULL);
+				std::swap(this->root, x.root);
+			}
 
         private:
 			Allocator _alloc;

@@ -37,9 +37,8 @@ namespace ft{
 		{
 				this->insert(first, last);
 		}
-		set(const set& other) : alloc(other.alloc), comp(other.comp) 
+		set(const set& other) : alloc(other.alloc), comp(other.comp), _data(other._data)
 		{
-			this->insert(other.begin(), other.end());
 		}
 		~set() 
 		{
@@ -91,6 +90,11 @@ namespace ft{
 		pair<iterator, bool>	insert(const key_type& k)
 		{
 			return (this->_data.insert(k));
+		}
+		
+		allocator_type	get_allocator() const
+		{
+				return this->alloc;
 		}
 
 		iterator	insert(iterator pos, key_type k)
@@ -195,12 +199,12 @@ namespace ft{
 		iterator	find (const key_type& k)
 		{
 		
-			return iterator( this->_data.searchPair(k), this->_data.getValue());
+			return iterator( this->_data.searchPair(k), this->_data.getSentinel());
 		}
 		
 		const_iterator	find (const key_type& k) const
 		{
-			return const_iterator(  this->_data.searchPair(k), this->_data.getValue());
+			return const_iterator(  this->_data.searchPair(k), this->_data.getSentinel());
 		}
 
 		ft::pair<iterator, iterator> equal_range(const key_type& key)
@@ -228,10 +232,9 @@ namespace ft{
 			{
 				if (other == *this)
 					return;
-
-				_data.swap(other._data);
-				this->alloc = other.alloc;
-				this->comp = other.comp;
+				std::swap(this->alloc, other.alloc);
+				std::swap(this->comp, other.comp);
+				this->_data.swap(other._data);
 			}
 		
 		private:
@@ -279,6 +282,12 @@ namespace ft{
 	bool operator>=(const ft::set<T, Alloc>& lhs, const ft::set<T, Alloc>& rhs) 
 	{
 		return !(lhs < rhs);
+	};
+
+	template<typename T, typename Alloc >
+	void swap(ft::set<T, Alloc>& lhs, ft::set<T, Alloc>& rhs)
+	{
+		return lhs.swap(rhs);
 	};
 
 }

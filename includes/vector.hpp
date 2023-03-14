@@ -73,7 +73,7 @@ namespace	ft
 					this->_data[i] = x._data[i];
 			};
 
-			allocator_type	&get_allocator(void)
+			allocator_type	get_allocator(void) const
 			{
 				return this->_alloc;
 			}

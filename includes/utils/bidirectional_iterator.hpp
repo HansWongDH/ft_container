@@ -95,9 +95,9 @@ namespace ft
 			{
 				if (*this == a)
 					return *this;
-				this->_p = a._p;
-				this->_TNULL = a._TNULL;
-				this->_cmp = a._cmp;
+				this->_p = a.getP();
+				this->_TNULL = a.getNULL();
+				this->_cmp = a.getComp();
 
 				return *this;
 			}
@@ -290,6 +290,7 @@ namespace ft
 			{
 				return this->_cmp;
 			}
+
 		private:
 			node_pointer	_p;
 			node_pointer	_TNULL;

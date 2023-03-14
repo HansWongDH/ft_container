@@ -36,9 +36,13 @@ int	main(void)
 	// std::cout << it.getPointer() << std::endl;
 
 	ft::map<int, int> lol;
+
+	ft::map<int, int> test;
+
+	lol = test;
 	// ft::map<int, int> test;
-	for (int i = 1; i < 10;i++)
-		lol.insert(ft::make_pair<const int, int>(i, i * 3));
+	// for (int i = 1; i < 10;i++)
+	// 	lol.insert(ft::make_pair<const int, int>(i, i * 3));
 
 
 	// ft::map<int,int>::const_iterator c_it = lol.begin();
@@ -57,16 +61,16 @@ int	main(void)
 	// it++;
 	// ft::map<int, int> test(lol);
 	// lol.clear();
-	std::map<int, int> lol2;
-	for (int i = 1; i < 10;i++)
-		lol2.insert(std::make_pair<const int, int>(i, i * 3));
-	std::map<int, int> test2;
+	// std::map<int, int> lol2;
+	// for (int i = 1; i < 10;i++)
+	// 	lol2.insert(std::make_pair<const int, int>(i, i * 3));
+	// std::map<int, int> test2;
 
-	test2 = lol2;
-	lol2.clear();
-		for (std::map<int, int>::iterator it = test2.begin(); it!= test2.end();it++)
-			std::cout << it->first << std::endl;
-	// lol.print();
+	// test2 = lol2;
+	// lol2.clear();
+	// 	for (std::map<int, int>::iterator it = test2.begin(); it!= test2.end();it++)
+	// 		std::cout << it->first << std::endl;
+	// // lol.print();
 	// for (std::map<int, int>::iterator test = lol.begin(); test != lol.end(); test++)
 	// 	std::cout << test->first << std::endl;
 	// lol.print();
