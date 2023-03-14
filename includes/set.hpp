@@ -20,8 +20,8 @@ namespace ft{
 		typedef typename allocator_type::pointer				pointer;
 		typedef typename allocator_type::const_pointer		const_pointer;
 		typedef typename allocator_type::size_type          					size_type;
-		typedef typename ft::RedBlackTree<key_type, value_type, key_compare>::const_iterator	iterator;
-		typedef typename ft::RedBlackTree<key_type, value_type, key_compare>::const_iterator	const_iterator;
+		typedef typename ft::RedBlackTree<value_type, key_compare>::const_iterator	iterator;
+		typedef typename ft::RedBlackTree<value_type, key_compare>::const_iterator	const_iterator;
 		typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
 		typedef typename ft::reverse_iterator<const_iterator>					const_reverse_iterator;
 		typedef typename iterator::difference_type								difference_type;
@@ -235,7 +235,7 @@ namespace ft{
 		private:
 			allocator_type	alloc;
 			key_compare		comp;
-			ft::RedBlackTree<key_type, value_type, key_compare> _data;
+			ft::RedBlackTree<value_type, key_compare> _data;
 
 	};
 

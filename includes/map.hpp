@@ -53,8 +53,8 @@ namespace	ft
 					return (c(lhs.first, rhs.first));
 				}
 		};
-            typedef typename ft::RedBlackTree<key_type, value_type, value_compare>::iterator	iterator;
-			typedef typename ft::RedBlackTree<key_type, value_type, value_compare>::const_iterator	const_iterator;
+            typedef typename ft::RedBlackTree<value_type, value_compare>::iterator	iterator;
+			typedef typename ft::RedBlackTree<value_type, value_compare>::const_iterator	const_iterator;
 			typedef typename ft::reverse_iterator<iterator>							reverse_iterator;
 			typedef typename ft::reverse_iterator<const_iterator>					const_reverse_iterator;
 			typedef typename iterator::difference_type								difference_type;
@@ -334,7 +334,7 @@ namespace	ft
     
         allocator_type alloc;
 		key_compare comp;
-		RedBlackTree<key_type, value_type, value_compare> _data;
+		RedBlackTree<value_type, value_compare> _data;
 		
 };
 	template< typename Key, typename T, typename Alloc >

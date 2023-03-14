@@ -17,7 +17,7 @@ namespace ft
 	/*when initialize a tree, its left and right is equal = nullptr_t, but to further differentiate its property, a node TNULL is created
 	 tho emulate NULL for tree*/
     template
-    <typename value, typename Key, class Compare = ft::my_less<Key>, bool Cst = false,  typename Allocator = std::allocator<ft::Node<Key> > >
+    <typename Key, class Compare = ft::my_less<Key>,  typename Allocator = std::allocator<ft::Node<Key> > >
     class RedBlackTree {
         public:
 			typedef Key					key_type;
