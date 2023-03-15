@@ -60,7 +60,7 @@ namespace	ft
 			template<class InputIt>
 			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = nullptr_t) : _alloc(alloc)
 			{
-				difference_type n = std::distance(first, last);
+				size_type n = std::distance(first, last);
 				if (n > this->max_size())
 					throw std::out_of_range("exceed maximum range");
 				this->_data = _alloc.allocate(n);
