@@ -28,15 +28,10 @@ namespace ft
 
 	};
 
-	stack( const stack& other )
-	{
-		*this = other;
-	}
-
 	stack	&operator=(const stack& other)
 	{
 		if (*this != other)
-			*this = other;
+			this->c = other.c;
 		return *this;
 	}	
 

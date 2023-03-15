@@ -4,7 +4,7 @@ SRC_DIR		= ./
 OBJ_DIR		= obj
 INC_DIR		= inc
 
-SRC_FILES	= vector.cpp
+SRC_FILES	= main.cp
 
 GCC 		= c++
 CFLAGS		= -Wall -Wextra -Werror
@@ -32,6 +32,21 @@ ${NAME}:	${LIBFT} $(MLX) ${OBJ_FILES} ${OBJ_BANNER}
 test: $(NAME)
 	./$(NAME)
 
+vector:
+				$(CXX) $(C++FLAGS) vector.cpp -o $(NAME)
+				./$(NAME)
+
+stack:
+				$(CXX) $(C++FLAGS) stack.cpp -o $(NAME)
+				./$(NAME)
+			
+map:
+				$(CXX) $(C++FLAGS) map.cpp -o $(NAME)
+				./$(NAME)
+
+set:
+				$(CXX) $(C++FLAGS) set.cpp -o $(NAME)
+				./$(NAME)
 clean:
 	$(RM) $(OBJ_DIR)/*
 

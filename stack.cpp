@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: schuah <schuah@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: wding-ha <wding-ha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 12:08:49 by schuah            #+#    #+#             */
-/*   Updated: 2022/12/23 22:17:12 by schuah           ###   ########.fr       */
+/*   Updated: 2023/03/15 17:50:28 by wding-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../srcs/stack.hpp"
+#include "./includes/stack.hpp"
 #include <iostream>
 #include <iomanip>
 #include <cassert>
@@ -95,6 +95,7 @@ int	main(void)
 
 		stack_check(ft_s1, std_s1);
 		stack_check(ft_s2, std_s2);
+		
 		stack_check(ft_temp, std_temp);
 		stack_check(ft_s3, std_s3);
 		stack_check(ft_s4, std_s4);
@@ -111,6 +112,7 @@ int	main(void)
 		stack_check(ft_s2, std_s2);
 		stack_check(ft_temp, std_temp);
 		stack_check(ft_s3, std_s3);
+
 		stack_check(ft_s4, std_s4);
 
 		print_break("Top");

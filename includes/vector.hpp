@@ -49,7 +49,9 @@ namespace	ft
 
 
 			explicit vector (size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()) : _alloc(alloc), _size(n), _capacity(n){
-		
+				
+				if (n > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				this->_data = _alloc.allocate(n);
 				for (size_type i = 0; i < n; i++)
 					_alloc.construct(this->_data + i,  val);
@@ -58,7 +60,9 @@ namespace	ft
 			template<class InputIt>
 			vector(InputIt first, InputIt last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = nullptr_t) : _alloc(alloc)
 			{
-				difference_type n = ft::distance(first, last);
+				difference_type n = std::distance(first, last);
+				if (n > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				this->_data = _alloc.allocate(n);
 				this->_size = n;
 				this->_capacity = n;
@@ -68,6 +72,8 @@ namespace	ft
 			
 			vector(const vector& x) : _alloc(x._alloc), _size(x.size()), _capacity(x.capacity())
 			{
+				if (x.size() > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				this->_data = _alloc.allocate(_size);
 				for (size_type i = 0; i < _size; i++)
 					this->_data[i] = x._data[i];
@@ -104,6 +110,8 @@ namespace	ft
 
 			void assign(size_type count, const value_type& value)
 			{
+				if (count > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				reserveAlgo(count);
 				for (size_type i = 0; i < count; i++)
 					this->_data[i] = value;
@@ -113,7 +121,9 @@ namespace	ft
 			template<class InputIt>
 			void assign(InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = nullptr_t)
 			{
-				size_type count = ft::distance(first, last);
+				size_type count = std::distance(first, last);
+				if (count > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				reserveAlgo(count);
 				for (size_type i = 0; i < count;first++, i++)
 					_alloc.construct(_data + i , *(first));
@@ -124,7 +134,7 @@ namespace	ft
 			{
 				if (count> capacity())
 				{
-					size_type new_cap = size() * 2;
+					size_type new_cap = capacity() * 2;
 					if (count > new_cap)
 						reserve(count);
 					else
@@ -179,7 +189,9 @@ namespace	ft
 			};
 
 			void	reserve(size_type new_cap)	{
-	
+				
+				if (new_cap > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				if (new_cap < this->_capacity)
 					return ;
 				pointer block = this->_alloc.allocate(new_cap);
@@ -246,15 +258,6 @@ namespace	ft
 			
 			};
 
-			// void	push_back(value_type n)
-			// {
-			// 	// std::cout << "current size is :" << _size << std::endl;
-			// 	if (size() + 1 > _capacity)
-			// 		reserve(size() + 1);
-			// 	_alloc.construct(this->_data + size() + 1, n);
-			// 	_size++;
-			// };
-
 			void	push_back(const value_type n)
 			{
 				// std::cout << "current size is :" << _size << std::endl;
@@ -294,7 +297,7 @@ namespace	ft
 			{
 				// std::cout << "range" << range << std::endl;
 				pointer	tmp = first.getPointer();
-				// size_type diff = ft::distance(first, last);
+				// size_type diff = std::distance(first, last);
 				
 				for (; first != last; first++)
 					_alloc.destroy(first.getPointer());
@@ -312,6 +315,8 @@ namespace	ft
 			{
 				// std::cout << "pos value is" << *pos << std::endl;
 				size_type t_pos = pos.getPointer() - begin().getPointer();
+				if (t_pos > this->size())
+					throw std::out_of_range("exceed maximum range");
 				size_type count = size() + 1 - t_pos;
 				if (size() + 1 > capacity())
 					reserveAlgo(size() + 1);
@@ -333,6 +338,8 @@ namespace	ft
 			{
 				// std::cout << "pos value is" << *pos << std::endl;
 				size_type t_pos = pos.getPointer() - begin().getPointer();
+				if (t_pos > this->size())
+					throw std::out_of_range("exceed maximum range");
 				size_type distance = size() + 1 - t_pos;
 				if (size() + count > capacity())
 					reserveAlgo(size() + count);
@@ -353,9 +360,14 @@ namespace	ft
 			void insert(iterator pos, InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = nullptr_t)
 			{
 				// std::cout << "pos value is" << *pos << std::endl;
+				
 				size_type t_pos = pos.getPointer() - begin().getPointer();
+				if (t_pos > this->size())
+					throw std::out_of_range("exceed maximum range");
 				size_type distance = size() + 1 - t_pos;
-				size_type count = ft::distance(first, last);
+				size_type count = std::distance(first, last);
+				if (count > this->max_size())
+					throw std::out_of_range("exceed maximum range");
 				reserveAlgo(size() + count);
 				// std::cout << t_pos << count << std::endl;
 				size_type i = 0;
